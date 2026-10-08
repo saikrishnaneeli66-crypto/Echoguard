@@ -1,0 +1,6 @@
+{
+  "name": "EchoGuard - Autonomous Incident Commander",
+  "description": "AI-powered autonomous incident remediation and self-healing platform for Kubernetes clusters with Gemini RCA, Digital Twin simulation, and safety policy engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

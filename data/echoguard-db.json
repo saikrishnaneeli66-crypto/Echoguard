@@ -1,0 +1,152 @@
+{
+  "incidents": [],
+  "actions": [],
+  "events": [
+    {
+      "id": "evt-init-01",
+      "timestamp": 1791432151896,
+      "type": "Normal",
+      "reason": "NodeReady",
+      "object": "node/k8s-control-plane-01",
+      "message": "Node k8s-control-plane-01 status is now Ready"
+    },
+    {
+      "id": "evt-init-02",
+      "timestamp": 1791432251896,
+      "type": "Normal",
+      "reason": "Scheduled",
+      "object": "pod/checkout-service-784f9bc-2k8l1",
+      "message": "Successfully assigned production/checkout-service-784f9bc-2k8l1 to worker-alpha"
+    },
+    {
+      "id": "evt-1791435859308",
+      "timestamp": 1791435859308,
+      "type": "Normal",
+      "reason": "RolloutUndo",
+      "object": "deployment/checkout-service",
+      "message": "Rollback completed: image restored from echoguard/checkout:v1.4.2-badcanary to stable echoguard/checkout:v1.4.0"
+    },
+    {
+      "id": "evt-1791435874363",
+      "timestamp": 1791435874363,
+      "type": "Normal",
+      "reason": "ClusterReset",
+      "object": "cluster/all",
+      "message": "EchoGuard operator reset cluster state to verified nominal baseline"
+    }
+  ],
+  "telemetryHistory": [],
+  "auditTrail": [
+    {
+      "id": "audit-reset-1791435874363",
+      "timestamp": 1791435874363,
+      "actor": "Human Engineer",
+      "actionType": "SYSTEM_RESET",
+      "target": "cluster/all",
+      "details": "All active incidents and pending actions purged; cluster reset to baseline.",
+      "severity": "INFO"
+    },
+    {
+      "id": "audit-1791435861510",
+      "timestamp": 1791435861510,
+      "actor": "Human Engineer",
+      "actionType": "REMEDIATION_COMPLETE",
+      "target": "checkout-service",
+      "details": "Remediation [rollback] succeeded. Verification Agent confirmed system recovery.",
+      "severity": "INFO"
+    },
+    {
+      "id": "audit-1791435859307",
+      "timestamp": 1791435859307,
+      "actor": "Human Engineer",
+      "actionType": "ACTION_APPROVED",
+      "target": "checkout-service",
+      "details": "High-risk action [rollback] approved by SRE Lead Sai Krishna. Execution dispatched.",
+      "severity": "INFO"
+    },
+    {
+      "id": "audit-1791435844759",
+      "timestamp": 1791435844759,
+      "actor": "Human Engineer",
+      "actionType": "ACTION_ENQUEUED",
+      "target": "checkout-service",
+      "details": "Action [rollback] enqueued. Status: pending_approval, Risk: HIGH",
+      "severity": "WARNING"
+    },
+    {
+      "id": "audit-1791435839644",
+      "timestamp": 1791435839644,
+      "actor": "Autonomous Agent",
+      "actionType": "INCIDENT_DETECTED",
+      "target": "checkout-service",
+      "details": "Incident [inc-muz2n8gs] detected: Bad Canary Deployment v1.4.2: 68% HTTP 500 Spike (Severity: CRITICAL)",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "audit-1791435764213",
+      "timestamp": 1791435764213,
+      "actor": "Autonomous Agent",
+      "actionType": "INCIDENT_DETECTED",
+      "target": "checkout-service",
+      "details": "Incident [inc-muz2lm9h] detected: Bad Canary Deployment v1.4.2: 68% HTTP 500 Spike (Severity: CRITICAL)",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "audit-init-1791435751896",
+      "timestamp": 1791432151896,
+      "actor": "System Operator",
+      "actionType": "CLUSTER_INIT",
+      "target": "k8s-production-cluster",
+      "details": "EchoGuard Autonomous Incident Commander cluster supervisor initialized.",
+      "severity": "INFO"
+    }
+  ],
+  "safetyPolicies": [
+    {
+      "actionType": "restart_pod",
+      "riskTier": "low",
+      "autoExecutable": true,
+      "maxDailyExecutions": 50,
+      "cooldownPeriodSec": 15,
+      "blastRadiusTolerance": "pod"
+    },
+    {
+      "actionType": "scale_replicas",
+      "riskTier": "medium",
+      "autoExecutable": true,
+      "maxDailyExecutions": 20,
+      "cooldownPeriodSec": 30,
+      "blastRadiusTolerance": "deployment"
+    },
+    {
+      "actionType": "rollback",
+      "riskTier": "high",
+      "autoExecutable": false,
+      "maxDailyExecutions": 5,
+      "cooldownPeriodSec": 120,
+      "blastRadiusTolerance": "deployment"
+    },
+    {
+      "actionType": "reroute_traffic",
+      "riskTier": "high",
+      "autoExecutable": false,
+      "maxDailyExecutions": 10,
+      "cooldownPeriodSec": 60,
+      "blastRadiusTolerance": "cluster"
+    },
+    {
+      "actionType": "config_update",
+      "riskTier": "high",
+      "autoExecutable": false,
+      "maxDailyExecutions": 5,
+      "cooldownPeriodSec": 180,
+      "blastRadiusTolerance": "deployment"
+    }
+  ],
+  "stats": {
+    "systemUptimeSeconds": 148200,
+    "totalIncidentsResolved": 9,
+    "autonomousRemediationsCount": 6,
+    "averageMttrSeconds": 5.2
+  }
+}
